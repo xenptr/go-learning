@@ -1,0 +1,85 @@
+{{/* DONE: Store templates in tmpl/                                           */}}
+{{/* DONE: Spruce up the page templates by making them valid HTML and adding  */}}
+{{/*       some CSS rules                                                      */}}
+{{/* DONE: Implement inter-page linking — body is rendered via .BodyHTML,     */}}
+{{/*       which has [PageName] patterns already converted to <a> tags by     */}}
+{{/*       regexp.ReplaceAllFunc in loadPage. We use {{.BodyHTML}} (not       */}}
+{{/*       {{printf "%s" .Body}}) so html/template outputs it unescaped.      */}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}} — Go Wiki</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            font-family: system-ui, sans-serif;
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+            color: #222;
+            background: #fafafa;
+            line-height: 1.6;
+        }
+
+        header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            border-bottom: 2px solid #0066cc;
+            padding-bottom: 0.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        header h1 { margin: 0; font-size: 1.6rem; color: #0066cc; }
+
+        nav a {
+            font-size: 0.85rem;
+            color: #0066cc;
+            text-decoration: none;
+            border: 1px solid #0066cc;
+            padding: 0.2rem 0.6rem;
+            border-radius: 3px;
+        }
+        nav a:hover { background: #0066cc; color: #fff; }
+
+        .content {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 1.2rem 1.5rem;
+        }
+
+        /* DONE: Inter-page linking — style the auto-generated wiki links */
+        .content a { color: #0066cc; }
+        .content a:hover { text-decoration: underline; }
+
+        footer {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #888;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>{{.Title}}</h1>
+    <nav><a href="/edit/{{.Title}}">Edit this page</a></nav>
+</header>
+
+<div class="content">
+    {{/* .BodyHTML is template.HTML — html/template outputs it without escaping */}}
+    {{/* so the <a> tags produced by our inter-page linking code render as HTML */}}
+    {{.BodyHTML}}
+</div>
+
+<footer>
+    <a href="/">Home</a>
+</footer>
+
+</body>
+</html>

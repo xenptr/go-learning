@@ -1,0 +1,4 @@
+Welcome to the Go Wiki!
+
+See [GoBasics] for an introduction.
+Learn about [Concurrency] and [Generics].
